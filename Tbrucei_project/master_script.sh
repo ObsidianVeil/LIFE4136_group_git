@@ -24,15 +24,16 @@ defs_directory=grep -v "^Output Location:" ./defs
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
 if ! [ -f ./$defs_fileloc]; then
-	echo "Filename does not exist"
+	echo "File location does not exist"
 	if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 		filelocation=./INSERT_YOUR_FILES_HERE
-		echo "Default input folder selected"
+		echo "INSERT_YOUR_FILES_HERE input folder selected"
 	else
 		echo "Error: No directory entered and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
 		end
 	fi
 else
+	echo "File location does exist"
 	filelocation=./defs_fileloc
 fi
 	
@@ -52,3 +53,4 @@ fi
 
 conda deactivate python
 
+exit
