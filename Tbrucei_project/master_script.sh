@@ -9,7 +9,7 @@
 #SBATCH --output=./logs/out/master-%x-%j.out
 #SBATCH --error=./logs/err/master-%x-%j.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mbxbk2@nottingham.ac.uk
+#SBATCH --mail-user=mbxsh12@nottingham.ac.uk
 
 source $HOME/.bash_profile
 
@@ -30,7 +30,7 @@ if ! [ -f ./$defs_fileloc]; then
 		echo "INSERT_YOUR_FILES_HERE input folder selected"
 	else
 		echo "Error: No directory entered and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
-		end
+		exit 1
 	fi
 else
 	echo "File location does exist"
@@ -39,7 +39,7 @@ fi
 	
 #test if output directory exists
 if ! [ -d ./$defs_directory]; then
-	echo "Warning: Directory does not exist. Outputting to default"
+	echo "Warning: Output Directory does not exist. Outputting to default"
 	mkdir -p ./outputs
 else
 	outputdir=$defs_directory
