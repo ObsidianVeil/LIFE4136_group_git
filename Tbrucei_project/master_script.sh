@@ -18,8 +18,8 @@ conda activate python
 outputdir=./output/
 
 #extracting user input filename and output directory
-defs_fileloc=grep -v "^File Location:" ./defs
-defs_directory=grep -v "^Output Location:" ./defs
+defs_fileloc=$(grep "^File Location:" ./defs | cut -d ":" -f 2-)
+defs_directory=$(grep "^Output Location:" ./defs | cut -d ":" -f 2-)
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
