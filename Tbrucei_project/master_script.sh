@@ -15,6 +15,7 @@ source $HOME/.bash_profile
 
 conda activate python
 
+echoerr() { cat <<< "$@" 1>&2; }
 outputdir=./output/
 
 #extracting user input filename and output directory
@@ -29,7 +30,7 @@ if ! [ -f ./$defs_fileloc]; then
 		filelocation=./INSERT_YOUR_FILES_HERE
 		echo "INSERT_YOUR_FILES_HERE input folder selected"
 	else
-		echo "Error: No directory entered and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
+		echoerr("Error: No directory entered and INSERT_YOUR_FILES_HERE directory empty. Ending the process")
 		exit 1
 	fi
 else
