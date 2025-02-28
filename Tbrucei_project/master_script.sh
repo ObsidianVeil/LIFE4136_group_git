@@ -5,29 +5,50 @@
 #SBATCH --cpus-per-task=16
 #SBATCH --mem=100G
 #SBATCH --time=10:00:00
-#SBATCH --job-name=samtobam
-#SBATCH --output=/share/BioinfMSc/rotation2/Group1/alignment/bowtie/samtobam.out
-#SBATCH --error=/share/BioinfMSc/rotation2/Group1/alignment/bowtie/samtobam.err
+#SBATCH --job-name=MasterScript
+#SBATCH --output=./logs/out/master-%x-%j.out
+#SBATCH --error=./logs/err/master-%x-%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mbxbk2@nottingham.ac.uk
 
 source $HOME/.bash_profile
 
+conda activate python
+
+outputdir=./output/
+
 #extracting user input filename and output directory
-defs_filename=grep -v "^Filename:" ./defs
+defs_fileloc=grep -v "^File Location:" ./defs
 defs_directory=grep -v "^Output Location:" ./defs
 
-#test if filename exists
-if ! [ -f ./$defs_filename]; 
-then
+#if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
+#If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
+if ! [ -f ./$defs_fileloc]; then
 	echo "Filename does not exist"
-	end
+	if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
+		filelocation=./INSERT_YOUR_FILES_HERE
+		echo "Default input folder selected"
+	else
+		echo "Error: No directory entered and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
+		end
+	fi
 else
-	filename=./defs_filename
+	filelocation=./defs_fileloc
+fi
 	
 #test if output directory exists
 if ! [ -d ./$defs_directory]; then
 	echo "Warning: Directory does not exist. Outputting to default"
+	mkdir -p ./outputs
+else
+	outputdir=$defs_directory
+fi
 
-conda activate python
+#QC on files
+
+
+#Trimming files
+
+
+conda deactivate python
 
