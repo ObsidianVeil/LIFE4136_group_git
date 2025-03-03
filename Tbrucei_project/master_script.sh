@@ -3,9 +3,9 @@
 #SBATCH --nodes=1
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=16
-#SBATCH --mem=100G
+#SBATCH --mem=1G
 #SBATCH --time=10:00:00
-#SBATCH --job-name=MasterScript
+#SBATCH --job-name=Tbrucei_MasterScript
 #SBATCH --output=./logs/out/master-%x-%j.out
 #SBATCH --error=./logs/err/master-%x-%j.err
 #SBATCH --mail-type=ALL
