@@ -15,7 +15,7 @@ source $HOME/.bash_profile
 
 conda activate python
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+#SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $SLURM_SUBMIT_DIR
 
@@ -28,7 +28,7 @@ export -f echoerr
 
 #extracting user input filename and output directory
 #defs_fastqloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
-defs_fastqloc=$(awk -F': ' '/^File Location:/ {print $2}' defs.txt | xargs)
+defs_fastqloc=$(awk -F': ' '/^Fastq.gz File Location:/ {print $2}' defs.txt | xargs)
 defs_output=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
@@ -39,7 +39,7 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 	filelocation="./INSERT_YOUR_FILES_HERE"
 	echo "INSERT_YOUR_FILES_HERE folder selected as input"
 	else
-		if [ -f "$defs_fastqloc" ]; then
+		if [ -d "$defs_fastqloc" ]; then
 			filelocation="$defs_fastqloc"
 			echo "Input file location obtained from defs"
 		else 
