@@ -46,7 +46,7 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 			exit 1
 		fi
 fi
-
+echo "fast.gz files obtained from $filelocation"
 export filelocation
 	
 #If output directory in defs file exists, set as outputdir
@@ -54,7 +54,7 @@ export filelocation
 if [ -d "$defs_output" ]; then
 	outputdir=$defs_output
 else
-	echo "Warning: Output directory from defs document does not exist. Outputting to default."
+	echo "Warning: error in Output directory from defs document. Outputting to default."
 	mkdir -p ./outputs
 	outputdir=$(realpath ./outputs)
 fi
