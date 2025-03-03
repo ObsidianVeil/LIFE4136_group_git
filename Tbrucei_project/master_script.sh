@@ -21,8 +21,8 @@ echoerr() { cat <<< "$@" 1>&2; }
 export echoerr
 
 #extracting user input filename and output directory
-defs_fileloc=$(grep "^Fastq.gz File Location:" ./defs | cut -d ":" -f 2-)
-defs_directory=$(grep "^Output Location:" ./defs | cut -d ":" -f 2-)
+defs_fileloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2-)
+defs_directory=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2-)
 
 echo $defs_fileloc
 
