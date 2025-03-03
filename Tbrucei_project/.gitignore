@@ -1,0 +1,8 @@
+#ignore data files
+*.fastq.gz
+
+#ignore logs files
+logs/
+
+#ignore outputs directory
+outputs/
