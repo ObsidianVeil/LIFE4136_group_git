@@ -20,7 +20,7 @@ SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 cd $SLURM_SUBMIT_DIR
 
 #echoerr() { cat <<< "$@" 1>&2; }
-echoerr() { printf "$*" >&2; }
+echoerr() { printf "%s\n" "$*" >&2; }
 
 
 #export variables
@@ -35,15 +35,15 @@ echo $defs_fileloc
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
 
-if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
+if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | grep -q; then
 	filelocation=./INSERT_YOUR_FILES_HERE
 	echo "INSERT_YOUR_FILES_HERE folder selected as input"
 	else
-		if ! [ -f ./$defs_fileloc]; then
+		if ! [ -f ./$defs_fileloc ]; then
 			filelocation=./$defs_fileloc
 			echo "Input file location obtained from defs"
 		else 
-			echoerr("Error: No directory entered in defs doc and INSERT_YOUR_FILES_HERE directory empty. Ending the process")
+			echoerr "Error: No directory entered in defs doc and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
 			exit 1
 		fi
 fi
