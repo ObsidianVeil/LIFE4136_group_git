@@ -50,7 +50,7 @@ export filelocation
 	
 #If output directory in defs file exists, set as outputdir
 #If output directory in defs file does not exist, make output directory and set as output.
-if [ -d ./$defs_output]; then
+if [ -d "$defs_output" ]; then
 	outputdir=$defs_output
 else
 	echo "Warning: Output directory from defs document does not exist. Outputting to default."
