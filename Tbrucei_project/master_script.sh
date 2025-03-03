@@ -52,7 +52,8 @@ export filelocation
 #If output directory in defs file exists, set as outputdir
 #If output directory in defs file does not exist, make output directory and set as output.
 if [ -d "$defs_output" ]; then
-	outputdir=$defs_output
+	mkdir -p $defs_output/$SLURM_JOB_ID
+	outputdir=$(realpath "$defs_output/$SLURM_JOB_ID")
 else
 	echo "Warning: error in Output directory from defs document. Outputting to default."
 	mkdir -p ./outputs
@@ -63,9 +64,15 @@ echo "Output files to $outputdir"
 export outputdir
 
 #QC on files
-
-
-#Trimming files
+ID1=$(sbatch --parsable ./1_QC/QC_analysis.sh)
+#trim on files
+#ID2=$(sbatch --parsable --dependency=afterok:"$ID1" "./2_trim/trim.sh")
+#alignment
+#ID3=$(sbatch --parsable --dependency=afterok:"$ID2" "./3_alignment/alignment.sh")
+#samtobam
+#ID4=$(sbatch --parsable --dependency=afterok:"$ID3" "./4_samtobam/samtobam.sh")
+#analysis
+#ID5=$(sbatch --parsable --dependency=afterok:"$ID4" "./5_analysis/analysis.sh")
 
 
 conda deactivate
