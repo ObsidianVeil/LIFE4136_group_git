@@ -16,7 +16,7 @@ source $HOME/.bash_profile
 conda activate python
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-echo SCRIPT_DIR
+echo $SCRIPT_DIR
 
 echoerr() { cat <<< "$@" 1>&2; }
 
