@@ -46,21 +46,20 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 		fi
 fi
 
-echo "Input fastqc.gz files from $filelocation"
-export -f filelocation
+export filelocation
 	
 #If output directory in defs file exists, set as outputdir
 #If output directory in defs file does not exist, make output directory and set as output.
-if [ -d ./$defs_directory]; then
-	outputdir=$defs_directory
+if [ -d ./$defs_output]; then
+	outputdir=$defs_output
 else
 	echo "Warning: Output directory from defs document does not exist. Outputting to default."
 	mkdir -p ./outputs
-	outputdir=./outputs
+	outputdir=$(realpath ./outputs)
 fi
 
 echo "Output files to $outputdir"
-export -f outputdir
+export outputdir
 
 #QC on files
 
@@ -68,6 +67,6 @@ export -f outputdir
 #Trimming files
 
 
-conda deactivate python
+conda deactivate
 
 exit
