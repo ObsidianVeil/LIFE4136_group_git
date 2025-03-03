@@ -27,15 +27,13 @@ echoerr() { printf "%s\n" "$*" >&2; }
 export -f echoerr
 
 #extracting user input filename and output directory
-defs_fastqloc=$(awk -F ': ' "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
+defs_fastqloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
 defs_output=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
-
-echo $defs_fastqloc
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
 
-if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | grep -q; then
+if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 	filelocation="./INSERT_YOUR_FILES_HERE"
 	echo "INSERT_YOUR_FILES_HERE folder selected as input"
 	else
@@ -48,6 +46,7 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | grep -q; then
 		fi
 fi
 
+echo "Input fastqc.gz files from $filelocation"
 export -f filelocation
 	
 #If output directory in defs file exists, set as outputdir
@@ -60,6 +59,7 @@ else
 	outputdir=./outputs
 fi
 
+echo "Output files to $outputdir"
 export -f outputdir
 
 #QC on files
