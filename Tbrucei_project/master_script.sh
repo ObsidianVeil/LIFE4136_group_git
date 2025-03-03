@@ -16,9 +16,8 @@ source $HOME/.bash_profile
 conda activate python
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
-echo $SLURM_SUBMIT_DIR
 
-echo $SLURM_JOB_ID
+swd $SLURM_SUBMIT_DIR
 
 echoerr() { cat <<< "$@" 1>&2; }
 
