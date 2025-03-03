@@ -27,7 +27,8 @@ echoerr() { printf "%s\n" "$*" >&2; }
 export -f echoerr
 
 #extracting user input filename and output directory
-defs_fastqloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
+#defs_fastqloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
+defs_fastqloc=$(awk -F': ' '/^File Location:/ {print $2}' defs.txt | xargs)
 defs_output=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
