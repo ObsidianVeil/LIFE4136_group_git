@@ -1,2 +1,2 @@
-File Location:
+Fastq.gz File Location: /share/BioinfMSc/Bill_resources/Tbrucei/fastq/Group1
 Output Location:
