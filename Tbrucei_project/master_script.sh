@@ -17,9 +17,11 @@ conda activate python
 
 SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-swd $SLURM_SUBMIT_DIR
+cd $SLURM_SUBMIT_DIR
 
-echoerr() { cat <<< "$@" 1>&2; }
+#echoerr() { cat <<< "$@" 1>&2; }
+echoerr() { printf "$*" >&2; }
+
 
 #export variables
 export -f echoerr
