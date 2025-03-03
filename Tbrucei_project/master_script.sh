@@ -27,8 +27,8 @@ echoerr() { printf "%s\n" "$*" >&2; }
 export -f echoerr
 
 #extracting user input filename and output directory
-defs_fileloc=$(awk -F ': ' "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2-)
-defs_directory=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2-)
+defs_fileloc=$(awk -F ': ' "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
+defs_directory=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
 
 echo $defs_fileloc
 
