@@ -32,6 +32,7 @@ defs_output=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2- | xargs)
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
+echo $defs_fastqloc
 
 if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 	filelocation="./INSERT_YOUR_FILES_HERE"
