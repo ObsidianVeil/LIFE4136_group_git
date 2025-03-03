@@ -6,7 +6,7 @@
 #SBATCH --mem=1G
 #SBATCH --time=10:00:00
 #SBATCH --job-name=Tbrucei_MasterScript
-#SBATCH --output=./logs/out/master-%x-%j.out
+#SBATCH --output=./logs/out/master/%x-%j.out
 #SBATCH --error=./logs/err/master-%x-%j.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mbxsh12@nottingham.ac.uk
@@ -18,6 +18,9 @@ conda activate python
 #SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
 cd $SLURM_SUBMIT_DIR
+
+JOB=$SLURM_JOB_ID
+export JOB
 
 #echoerr() { cat <<< "$@" 1>&2; }
 echoerr() { printf "%s\n" "$*" >&2; }
