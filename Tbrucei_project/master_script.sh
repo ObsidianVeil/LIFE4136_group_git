@@ -16,14 +16,15 @@ source $HOME/.bash_profile
 conda activate python
 
 echoerr() { cat <<< "$@" 1>&2; }
-outputdir=./output/
 
 #export variables
 export echoerr
 
 #extracting user input filename and output directory
-defs_fileloc=$(grep "^File Location:" ./defs | cut -d ":" -f 2-)
+defs_fileloc=$(grep "^Fastq.gz File Location:" ./defs | cut -d ":" -f 2-)
 defs_directory=$(grep "^Output Location:" ./defs | cut -d ":" -f 2-)
+
+echo $defs_fileloc
 
 #if file location in defs file does not exist, check if INSERT_YOUR_FILES_HERE is empty. 
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
@@ -41,14 +42,19 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 		fi
 fi
 
+export filelocation
 	
-#test if output directory exists
-if ! [ -d ./$defs_directory]; then
+#If output directory in defs file exists, set as outputdir
+#If output directory in defs file does not exist, make output directory and set as output.
+if [ -d ./$defs_directory]; then
+	outputdir=$defs_directory
+else
 	echo "Warning: Output directory from defs document does not exist. Outputting to default."
 	mkdir -p ./outputs
-else
-	outputdir=$defs_directory
+	outputdir=./outputs
 fi
+
+export outputdir
 
 #QC on files
 
