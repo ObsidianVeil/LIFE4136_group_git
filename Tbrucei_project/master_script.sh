@@ -27,7 +27,7 @@ echoerr() { printf "%s\n" "$*" >&2; }
 export -f echoerr
 
 #extracting user input filename and output directory
-defs_fileloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2-)
+defs_fileloc=$(awk -F ': ' "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2-)
 defs_directory=$(grep "^Output Location:" ./defs.txt | cut -d ":" -f 2-)
 
 echo $defs_fileloc
@@ -36,14 +36,14 @@ echo $defs_fileloc
 #If no, set file location to INSERT_YOUR_FILES_HERE. If yes, end
 
 if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | grep -q; then
-	filelocation=./INSERT_YOUR_FILES_HERE
+	filelocation="./INSERT_YOUR_FILES_HERE"
 	echo "INSERT_YOUR_FILES_HERE folder selected as input"
 	else
-		if ! [ -f ./$defs_fileloc ]; then
-			filelocation=./$defs_fileloc
+		if [ -f "$defs_fileloc" ]; then
+			filelocation="$defs_fileloc"
 			echo "Input file location obtained from defs"
 		else 
-			echoerr "Error: No directory entered in defs doc and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
+			echoerr "Error: Invalid directory entered in defs doc and INSERT_YOUR_FILES_HERE directory empty. Ending the process"
 			exit 1
 		fi
 fi
