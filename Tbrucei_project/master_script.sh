@@ -15,10 +15,13 @@ source $HOME/.bash_profile
 
 conda activate python
 
+cd "$(dirname "$0")"
+pwd
+
 echoerr() { cat <<< "$@" 1>&2; }
 
 #export variables
-export echoerr
+export -f echoerr
 
 #extracting user input filename and output directory
 defs_fileloc=$(grep "^Fastq.gz File Location:" ./defs.txt | cut -d ":" -f 2-)
@@ -42,7 +45,7 @@ if find ./INSERT_YOUR_FILES_HERE -mindepth 1 -maxdepth 1 | read; then
 		fi
 fi
 
-export filelocation
+export -f filelocation
 	
 #If output directory in defs file exists, set as outputdir
 #If output directory in defs file does not exist, make output directory and set as output.
@@ -54,7 +57,7 @@ else
 	outputdir=./outputs
 fi
 
-export outputdir
+export -f outputdir
 
 #QC on files
 
