@@ -69,7 +69,7 @@ export outputdir
 #QC on files
 ID1=$(sbatch --parsable ./1_QC/QC_analysis.sh)
 #trim on files
-#ID2=$(sbatch --parsable --dependency=afterok:"$ID1" "./2_trim/trim.sh")
+ID2=$(sbatch --parsable --dependency=afterok:"$ID1" "./2_trim/trim.sh")
 #alignment
 #ID3=$(sbatch --parsable --dependency=afterok:"$ID2" "./3_alignment/alignment.sh")
 #samtobam
