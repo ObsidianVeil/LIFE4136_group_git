@@ -29,9 +29,11 @@ FILES=(
     "Rat5.fastq.gz"
 )
 
+mkdir -p $outputdir/trim
+
 # Run Trim Galore on all samples i have used for so we can keep the code clean  
-for FILE in "${FILES[@]}"; do
-    trim_galore --fastqc --quality 28  --output_dir $outputdir "$filelocation/*.fastq.gz"
+for FILE in *.fastq.gz; do
+    trim_galore --fastqc --quality 28  --output_dir $outputdir/trim "$filelocation/$FILE"
 done
 
 #for FILE in "${FILES[@]}"; do
