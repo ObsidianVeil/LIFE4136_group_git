@@ -6,21 +6,14 @@
 #SBATCH --mem=50G
 #SBATCH --time=04:00:00
 #SBATCH --job-name=trimming 
-#SBATCH --output=/share/BioinfMSc/Bill_resources/Tbrucei/fastq/Group1/data_trim/trim.out
-#SBATCH --error=/share/BioinfMSc/Bill_resources/Tbrucei/fastq/Group1/data_trim/trim.err
+#SBATCH --output=./logs/trim/%j-%x.out
+#SBATCH --error=./logs/trim/%j-%x.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mbxbk2@nottingham.ac.uk
+#SBATCH --mail-user=mbxsh12@nottingham.ac.uk
 
 source $HOME/.bash_profile
 
-conda activate python 
-
-# Define directories
-INPUT_DIR="/share/BioinfMSc/Bill_resources/Tbrucei/fastq/Group1/rawdata"
-OUTPUT_DIR="/share/BioinfMSc/Bill_resources/Tbrucei/fastq/Group1/data_trim"
-
-# Create output directory if it doesn't exist
-mkdir -p $OUTPUT_DIR
+echo "Running trim"
 
 # List of files to process 
 FILES=(
@@ -38,8 +31,11 @@ FILES=(
 
 # Run Trim Galore on all samples i have used for so we can keep the code clean  
 for FILE in "${FILES[@]}"; do
-    trim_galore --fastqc --quality 28  --output_dir $OUTPUT_DIR "$INPUT_DIR/$FILE"
+    trim_galore --fastqc --quality 28  --output_dir $outputdir "$filelocation/*.fastq.gz"
 done
 
-conda deactivate
+#for FILE in "${FILES[@]}"; do
+#    trim_galore --fastqc --quality 28  --output_dir $OUTPUT_DIR "$filelocation/$FILE"
+#done
+
 

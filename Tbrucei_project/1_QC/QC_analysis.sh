@@ -13,6 +13,8 @@
 
 source $HOME/.bash_profile
 
+echo "Running QC analysis"
+
 #Make 
 mkdir -p $outputdir/FastQC
 
