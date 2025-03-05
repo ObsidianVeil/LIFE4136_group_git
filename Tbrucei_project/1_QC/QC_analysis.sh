@@ -6,8 +6,8 @@
 #SBATCH --mem=100G
 #SBATCH --time=02:00:00
 #SBATCH --job-name=fastqc_analysis 
-#SBATCH --output=../logs/$JOB/FastQC/%x-%j.out
-#SBATCH --error=../logs/$JOB/FastQC/%x-%j.err
+#SBATCH --output=./logs/FastQC/%j-%x.out
+#SBATCH --error=./logs/FastQC/%j-%n.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mbxsh12@nottingham.ac.uk
 
