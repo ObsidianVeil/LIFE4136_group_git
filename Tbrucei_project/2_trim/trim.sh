@@ -35,6 +35,7 @@ mkdir -p $outputdir/trim
 
 # Run Trim Galore on all samples i have used for so we can keep the code clean  
 for FILE in "$filelocation"/*.fastq.gz; do
+	echo "Running: $FILE"
     trim_galore --fastqc --quality 28  --output_dir $outputdir/trim "$FILE"
 done
 
