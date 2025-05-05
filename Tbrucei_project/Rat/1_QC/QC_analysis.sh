@@ -15,8 +15,8 @@ source $HOME/.bash_profile
 
 conda activate Python #Change Python to the name of the relevant conda environment
 
-filelocation="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/INSERT_FILES_HERE"
-outputdir="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/1_QC"
+filelocation="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/INSERT_FILES_HERE" #set to wherever your input .fastq.gz files are
+outputdir="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/1_QC" #set to output location
 
 echo "Running QC analysis"
 
