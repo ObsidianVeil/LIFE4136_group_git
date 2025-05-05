@@ -15,6 +15,10 @@ source $HOME/.bash_profile
 
 echo "Running trim"
 
+outputdir="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/2_trim" #set to wherever you want files outputted
+filelocation="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/INSERT_FILES_HERE" #set to wherever your input .fastq.gz files are
+FILES=ls $filelocation/*.fastq.gz
+
 # List of files to process 
 #FILES=(
 #    "Human1.fastq.gz"
@@ -29,7 +33,7 @@ echo "Running trim"
 #    "Rat5.fastq.gz"
 #)
 
-FILES=ls *.fastq.gz
+
 
 mkdir -p $outputdir/trim
 
