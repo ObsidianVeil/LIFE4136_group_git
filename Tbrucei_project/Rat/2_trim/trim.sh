@@ -15,9 +15,11 @@ source $HOME/.bash_profile
 
 echo "Running trim"
 
+conda activate Python #change python to relevant conda environment
+
 outputdir="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/2_trim" #set to wherever you want files outputted
 filelocation="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/INSERT_FILES_HERE" #set to wherever your input .fastq.gz files are
-FILES=ls $filelocation/*.fastq.gz
+FILES=($(basename -a $filelocation/*.fastq.gz))
 
 # List of files to process 
 #FILES=(
@@ -38,13 +40,8 @@ FILES=ls $filelocation/*.fastq.gz
 mkdir -p $outputdir/trim
 
 # Run Trim Galore on all samples i have used for so we can keep the code clean  
-for FILE in "$filelocation"/*.fastq.gz; do
-	echo "Running: $FILE"
-    trim_galore --fastqc --quality 28  --output_dir $outputdir/trim "$FILE"
+for FILE in "${FILES[@]}"; do
+    trim_galore --fastqc --quality 28  --output_dir $outputdir "$filelocation/$FILE"
 done
 
-#for FILE in "${FILES[@]}"; do
-#    trim_galore --fastqc --quality 28  --output_dir $OUTPUT_DIR "$filelocation/$FILE"
-#done
-
-
+conda deactivate
