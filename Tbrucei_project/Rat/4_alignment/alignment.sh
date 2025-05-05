@@ -6,8 +6,8 @@
 #SBATCH --mem=100G
 #SBATCH --time=10:00:00
 #SBATCH --job-name=star_alignment
-#SBATCH --output=/share/BioinfMSc/rotation2/Group1/alignment_star/alignment.out
-#SBATCH --error=/share/BioinfMSc/rotation2/Group1/alignment_star/alignment.err
+#SBATCH --output=./logs/alignment_%j-%x.out
+#SBATCH --error=./logs/alignment_%j-%x.err
 #SBATCH --mail-type=ALL
 #SBATCH --mail-user=mbxbk2@nottingham.ac.uk
 
