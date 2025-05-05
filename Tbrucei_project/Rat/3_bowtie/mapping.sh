@@ -14,6 +14,8 @@
 source $HOME/.bash_profile
 conda activate python
 
+mkdir -p logs
+
 # Define directories
 DATA_DIR="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/2_trim"
 REF_DIR="/share/BioinfMSc/rotation2/Group1/references/v68"
@@ -28,12 +30,20 @@ for fq in $DATA_DIR/*_trimmed.fq.gz; do
 
     echo "Aligning $base to T. brucei genome..."
     bowtie2 -x $REF_DIR/Tbrucei_index -U $fq --threads 8 \
-            -S $OUT_DIR/${base}_aligned.sam.gz
+            -S $OUT_DIR/${base}_aligned.sam
 	gzip $OUT_DIR/${base}_aligned.sam
 
 done
 
 echo "Mapping completed successfully!"
+
+for sam in "$OUT_DIR"/*.sam.gz; do
+    base=$(basename $sam _aligned.sam.gz)
+    gunzip -c $sam | samtools view -bS - | samtools sort -o /share/BioinfMSc/rotation2/Group1/alignment/bowtie/${base}_aligned_sorted.bam
+    samtools index /share/BioinfMSc/rotation2/Group1/alignment/bowtie/${base}_aligned_sorted.bam
+done
+
+echo "Converted sam files to bam files successfully!"
 
 conda deactivate
 
