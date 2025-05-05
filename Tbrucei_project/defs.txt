@@ -1,2 +1,0 @@
-Fastq.gz File Location:
-Output Location:
