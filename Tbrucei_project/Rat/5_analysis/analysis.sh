@@ -6,19 +6,21 @@
 #SBATCH --mem=100G
 #SBATCH --time=23:00:00
 #SBATCH --job-name=htseq_analysis
-#SBATCH --output=/share/BioinfMSc/rotation2/Group1/htseq/htseq_analysis.out
-#SBATCH --error=/share/BioinfMSc/rotation2/Group1/htseq/htseq_analysis.err
+#SBATCH --output=/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/5_analysis/logs/htseq_analysis_%j-%x.out
+#SBATCH --error=/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/5_analysis/logs/htseq_analysis_%j-%x.err
 #SBATCH --mail-type=ALL
-#SBATCH --mail-user=mbxbk2@nottingham.ac.uk
+#SBATCH --mail-user=mbxsh12@nottingham.ac.uk
 
 
 source $HOME/.bash_profile
 conda activate python 
 
+mkdir -p /share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/5_analysis/logs
+
 # Define paths
-DATA_DIR="/share/BioinfMSc/rotation2/Group1/alignment/bowtie"
+DATA_DIR="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/4_alignment"
 REF_DIR="/share/BioinfMSc/rotation2/Group1/references/v68"
-OUT_DIR="/share/BioinfMSc/rotation2/Group1/htseq"
+OUT_DIR="/share/BioinfMSc/rotation2/Group1/LIFE4136_group_git/Tbrucei_project/Rat/5_analysis"
 
 # Create output directory if not exists
 mkdir -p $OUT_DIR
