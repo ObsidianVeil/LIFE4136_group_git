@@ -6,3 +6,6 @@ logs/
 
 #ignore outputs directory
 outputs/
+
+#ignore .identifier
+*.identifier
